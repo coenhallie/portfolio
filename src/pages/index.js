@@ -1,22 +1,23 @@
 import React from "react"
-import { Link } from "gatsby"
-
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import RightHomeComponent from "../components/right-home-component"
+import {StaticQuery, graphql} from "gatsby"
 
-const IndexPage = () => (
+export default () => {
+  <StaticQuery query={graphql`
+  {
+    test: file(relativePath: {eq: "test.jpg"}) {
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid
+        }
+        }
+      }
+    }
+  `}
+  render={(data) => (
   <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/portfolio/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    <RightHomeComponent />
   </Layout>
-)
+  )}
 
-export default IndexPage
